@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Health AI — Disease Checker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Animated Hero Banner -->
+  <header>
+    <div class="hero-particles" id="particles"></div>
+    <div class="hero-content">
+      <div class="logo">🩺 Health AI</div>
+      <h1 class="hero-title">AI-Powered Disease Checker</h1>
+      <p class="hero-sub">Enter your symptoms — our RAG engine + Gemini AI will analyze instantly</p>
+      <div class="hero-badges">
+        <span class="badge">RAG Technology</span>
+        <span class="badge">Gemini AI</span>
+        <span class="badge">41 Diseases</span>
+        <span class="badge">Free Forever</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Input Section -->
+    <section class="input-section">
+      <h2>Enter Your Symptoms</h2>
+      <p class="hint">Separate symptoms with commas — or click a sample below</p>
+
+      <!-- Sample Symptom Chips -->
+      <div class="chips">
+        <button class="chip" onclick="fillSymptom('itching, skin rash, nodal skin eruptions')">🔴 Skin Rash</button>
+        <button class="chip" onclick="fillSymptom('fever, headache, chills, sweating')">🌡️ Fever</button>
+        <button class="chip" onclick="fillSymptom('cough, breathlessness, chest pain')">🫁 Chest Issues</button>
+        <button class="chip" onclick="fillSymptom('fatigue, weight loss, restlessness')">😴 Fatigue</button>
+        <button class="chip" onclick="fillSymptom('stomach pain, vomiting, nausea')">🤢 Stomach</button>
+        <button class="chip" onclick="fillSymptom('joint pain, swelling, stiffness')">🦴 Joint Pain</button>
+      </div>
+
+      <div class="input-box">
+        <textarea
+          id="symptom-input"
+          placeholder="e.g. itching, skin rash, nodal skin eruptions..."
+          rows="3"
+        ></textarea>
+        <button id="diagnose-btn" onclick="getDiagnosis()">
+          Analyze Symptoms
+        </button>
+      </div>
+    </section>
+
+    <!-- Loading -->
+    <div id="loading" class="loading hidden">
+      <div class="spinner"></div>
+      <p>AI is analyzing your symptoms...</p>
+    </div>
+
+    <!-- Results Section -->
+    <section id="results" class="results hidden">
+      <div class="matches-card">
+        <h3>Top Disease Matches</h3>
+        <div id="matches-list"></div>
+      </div>
+      <div class="diagnosis-card">
+        <h3>AI Diagnosis</h3>
+        <div id="diagnosis-text"></div>
+      </div>
+    </section>
+
+    <!-- Recent Searches -->
+    <section class="recent-section" id="recent-section" style="display:none">
+      <h2>Recent Searches</h2>
+      <div id="recent-list"></div>
+    </section>
+
+    <!-- Dashboard -->
+    <section class="dashboard">
+      <h2>Analytics Dashboard</h2>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-number">41</span>
+          <span class="stat-label">Diseases Covered</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">132</span>
+          <span class="stat-label">Symptoms Tracked</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" id="search-count">0</span>
+          <span class="stat-label">Searches Done</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">RAG</span>
+          <span class="stat-label">AI Technology</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Built by Ayush Yadav · Health AI Project · 2026</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
