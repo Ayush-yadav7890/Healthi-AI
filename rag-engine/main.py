@@ -10,7 +10,7 @@ from sentence_transformers import SentenceTransformer
 import os
 from dotenv import load_dotenv
 
-load_dotenv('../.env')
+load_dotenv()
 
 app = FastAPI()
 
@@ -21,10 +21,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Static files (frontend)
-app.mount("/", StaticFiles(directory="../frontend", html=True), name="frontend")
-
-# Load models
 client = Groq(api_key=os.getenv('GROQ_API_KEY'))
 model_embed = SentenceTransformer('all-MiniLM-L6-v2')
 index = faiss.read_index('../data/faiss_index.bin')
@@ -42,7 +38,6 @@ def health():
 @app.post("/api/diagnose")
 def diagnose(request: SymptomsRequest):
     symptoms_text = request.symptoms
-
     query_embedding = model_embed.encode([symptoms_text])
     distances, indices = index.search(np.array(query_embedding), k=3)
     top_diseases = [chunks[idx] for idx in indices[0]]
@@ -71,7 +66,8 @@ Be clear and concise."""
         "top_matches": [{"disease": d["disease"]} for d in top_diseases],
         "ai_diagnosis": response.choices[0].message.content
     }
-    if __name__ == "__main__":
+
+if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PORT", 8000))
     uvicorn.run("main:app", host="0.0.0.0", port=port)
